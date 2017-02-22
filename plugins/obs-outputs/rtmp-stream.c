@@ -270,7 +270,7 @@ static int socket_queue_data(RTMPSockBuf *sb, const char *data, int len, void *a
 retry_send:
 
 	if (!RTMP_IsConnected(&stream->rtmp))
-		return -1;
+		return 0;
 
 	pthread_mutex_lock(&stream->write_buf_mutex);
 
@@ -279,7 +279,6 @@ retry_send:
 		pthread_mutex_unlock(&stream->write_buf_mutex);
 
 		if (os_event_wait(stream->buffer_space_available_event)) {
-			pthread_mutex_unlock(&stream->write_buf_mutex);
 			return 0;
 		}
 
