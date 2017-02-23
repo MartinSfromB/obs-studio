@@ -71,7 +71,11 @@ if(WIN32)
 		${OBS_JANSSON_IMPORT})
 
 	if(ENABLE_WIN_UPDATER)
+		include_directories(${BLAKE2_INCLUDE_DIR})
 		add_definitions(-DENABLE_WIN_UPDATER)
+		set(obs_PLATFORM_LIBRARIES
+			${obs_PLATFORM_LIBRARIES}
+			blake2)
 	endif()
 elseif(APPLE)
 	set(obs_PLATFORM_SOURCES

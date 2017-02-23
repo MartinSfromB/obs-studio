@@ -10,6 +10,7 @@ add_subdirectory(file-updater)
 
 if(WIN32)
 	add_subdirectory(lzma)
+	add_subdirectory(blake2)
 endif()
 
 if(BUILD_CAPTIONS)
