@@ -55,6 +55,7 @@ add_definitions(${LIBCURL_DEFINITIONS})
 
 if(WIN32)
 	include_directories(${OBS_JANSSON_INCLUDE_DIRS})
+	include_directories(${BLAKE2_INCLUDE_DIR})
 
 	set(obs_PLATFORM_SOURCES
 		platform-windows.cpp
@@ -68,14 +69,11 @@ if(WIN32)
 		win-update/win-update-helpers.hpp)
 	set(obs_PLATFORM_LIBRARIES
 		crypt32
+		blake2
 		${OBS_JANSSON_IMPORT})
 
 	if(ENABLE_WIN_UPDATER)
-		include_directories(${BLAKE2_INCLUDE_DIR})
 		add_definitions(-DENABLE_WIN_UPDATER)
-		set(obs_PLATFORM_LIBRARIES
-			${obs_PLATFORM_LIBRARIES}
-			blake2)
 	endif()
 elseif(APPLE)
 	set(obs_PLATFORM_SOURCES
